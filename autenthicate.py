@@ -1,4 +1,5 @@
 import requests
+import validators
 import os
 
 environment = {
@@ -10,11 +11,14 @@ environment = {
 	"password": "",
 	"security_token": ""
 }
-	
-response = requests.post(environment["base_url"] + "/services/oauth2/token", params=environment)
 
-status_code = response.status_code
-error = response.json().get("error_description")
-access_token = response.json().get("access_token") 
-instance_url = response.json().get("instance_url") 
-token_type = response.json().get("token_type") 
+if validators.url(environment["base_url"]):
+  response = requests.post(environment["base_url"] + "/services/oauth2/token", params=environment)
+
+  status_code = response.status_code
+  error = response.json().get("error_description")
+  access_token = response.json().get("access_token") 
+  instance_url = response.json().get("instance_url") 
+  token_type = response.json().get("token_type") 
+else:
+  print("invalid parameter: base_url")

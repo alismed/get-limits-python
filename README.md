@@ -20,3 +20,7 @@ This use OAuth 2.0 protocol and [connected app](https://help.salesforce.com/arti
  * apiVersion
 
 
+**Setup**
+```
+pip install validators
+```
